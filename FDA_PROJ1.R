@@ -1,0 +1,21 @@
+rm(list=ls())
+setwd("C:/Users/Admin/Desktop/data analytics")
+data_a=read.csv("unemployment analysis.csv")
+install.packages("dplyr")
+library(dplyr)
+data<-sample_n(data_a,25)
+data
+plot(seq(1,length(data$X1991),by=1),data$X1991,pch=19,frame= TRUE)
+install.packages("ggplot2")
+library(ggplot2)
+ggplot(data,aes(x=Country.Code,y=X1991))+goem_point()
+
+cor.test(data$X1992,data$X1991)
+library(dplyr)
+data2=select(data,c(X1991,X1992))
+cmatrix=round(cor(data2),4)
+install.packages("reshape2")
+library(reshape2)
+cmatrix_melted=melt(cmatrix)
+ggplot(cmatrix_melted,aes(x=Var1,y=Var2,fill=value))+geom_tile()
+
